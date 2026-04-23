@@ -76,7 +76,11 @@ public class ConsoleView
         Dictionary<string, double> vehiculos = new Dictionary<string, double>();
         foreach (VehiculoViewModel vehiculo in _vehiculos)
         {
-            vehiculos.Add(vehiculo.GetPatente(), vehiculo.GetKmARecorrer());
+            if (vehiculos.ContainsKey(vehiculo.GetPatente()))
+            {
+                continue;
+            }
+            vehiculos.Add(vehiculo.GetPatente(), 100);
         }
         (double, double) totalConsumos = Controlador.CalcularConsumos(vehiculos);
         DibujarLinea();
